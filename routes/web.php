@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\RequestController; 
+
 
 Route::get('/hallo', function () {
     return view('hallo'); 
@@ -45,4 +48,19 @@ Route::get('/tes', function () {
     return redirect()->action([RoutesController::class, 'Dashboard']);
 });
 
-Route::get('/login', [LoginController::class, 'login']);
+// Route::get('/login', [LoginController::class, 'login'])->name('login');
+// Route::post('/login', [LoginController::class, 'postLogin']);
+
+Route::get('/perpustakaan/{buku}', [RoutesController::class, 'perpustakaan']);
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/login', [PagesController::class, 'loginPage'])->name('login');
+
+Route::get('/admin', [PagesController::class, 'dashboardAdmin'])->name('dashboardAdmin');
+
+Route::post('/createpenerbit', [PenerbitController::class, 'create'])->name('action.createpenerbit');
+
+Route::get('/createpenerbit', [PagesController:: class, 'create_penerbit'])->name('create_penerbit');
